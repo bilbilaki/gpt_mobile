@@ -147,9 +147,11 @@ class SettingDataSourceImpl @Inject constructor(
         pref[apiUrlMap[apiType]!!]
     }.first()
 
-    override suspend fun getToken(apiType: ApiType): String? = dataStore.data.map { pref ->
-        pref[apiTokenMap[apiType]!!]
+    override suspend fun getToken(apiType: ApiType): String {
+    return dataStore.data.map { pref ->
+        pref[apiTokenMap[apiType]!!] ?: "aa-mqZOVXlLKszSHZALkSCRJTVq2dVGawppvW3Pbq3dDCPl2Dv4" // Default token if not present
     }.first()
+}
 
     override suspend fun getModel(apiType: ApiType): String? = dataStore.data.map { pref ->
         pref[apiModelMap[apiType]!!]
