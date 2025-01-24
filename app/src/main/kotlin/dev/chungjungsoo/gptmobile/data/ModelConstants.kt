@@ -10,10 +10,10 @@ object ModelConstants {
     val groqModels = linkedSetOf("llama-3.2-3b-preview", "llama-3.2-1b-preview", "llama-3.1-70b-versatile", "llama-3.1-8b-instant", "gemma2-9b-it")
     val ollamaModels = linkedSetOf<String>()
 
-    const val OPENAI_API_URL = "https://api.openai.com/v1/"
-    const val ANTHROPIC_API_URL = "https://api.anthropic.com/"
-    const val GOOGLE_API_URL = "https://generativelanguage.googleapis.com"
-    const val GROQ_API_URL = "https://api.groq.com/openai/v1/"
+    const val OPENAI_API_URL = "https://api.avalai.ir/v1/"
+    const val ANTHROPIC_API_URL = "https://api.avalai.ir/v1/"
+    const val GOOGLE_API_URL = "https://api.avalai.ir/v1"
+    const val GROQ_API_URL = "https://api.avalai.ir/v1/"
 
     fun getDefaultAPIUrl(apiType: ApiType) = when (apiType) {
         ApiType.OPENAI -> OPENAI_API_URL
