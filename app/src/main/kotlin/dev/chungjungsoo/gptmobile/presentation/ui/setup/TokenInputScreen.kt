@@ -73,67 +73,14 @@ fun TokenInputScreen(
             )
             Spacer(modifier = Modifier.weight(1f))
             PrimaryLongButton(
-                enabled = platformState.filter { it.selected && it.name != ApiType.OLLAMA }.all { platform -> platform.token != null },
+                // Enable button regardless of input
+                enabled = true,
                 onClick = {
+                    // Here you might also add logic to handle default token values if needed
                     val nextStep = setupViewModel.getNextSetupRoute(currentRoute)
                     onNavigate(nextStep)
                 },
                 text = stringResource(R.string.next)
-            )
-        }
-    }
-}
-
-@Preview
-@Composable
-fun TokenInputText(modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(20.dp)
-    ) {
-        Text(
-            modifier = Modifier
-                .padding(4.dp)
-                .semantics { heading() },
-            text = stringResource(R.string.enter_api_key),
-            style = MaterialTheme.typography.headlineMedium
-        )
-        Text(
-            modifier = Modifier.padding(4.dp),
-            text = stringResource(R.string.token_input_description),
-            style = MaterialTheme.typography.bodyLarge
-        )
-        Text(
-            modifier = Modifier.padding(4.dp),
-            text = stringResource(R.string.token_input_warning),
-            style = MaterialTheme.typography.bodyLarge
-        )
-    }
-}
-
-@Preview
-@Composable
-fun TokenInput(
-    modifier: Modifier = Modifier,
-    platforms: List<Platform> = listOf(),
-    onChangeEvent: (Platform, String) -> Unit = { _, _ -> },
-    onClearEvent: (Platform) -> Unit = {}
-) {
-    val labels = getPlatformAPILabelResources()
-    val helpLinks = getPlatformHelpLinkResources()
-
-    Column(modifier = modifier) {
-        // Ollama doesn't currently support api keys
-        platforms.filter { it.selected && it.name != ApiType.OLLAMA }.forEachIndexed { i, platform ->
-            val isLast = platforms.filter { it.selected && it.name != ApiType.OLLAMA }.size - 1 == i
-            TokenInputField(
-                value = platform.token ?: "",
-                onValueChange = { onChangeEvent(platform, it) },
-                onClearClick = { onClearEvent(platform) },
-                label = labels[platform.name]!!,
-                keyboardOptions = KeyboardOptions(imeAction = if (isLast) ImeAction.Done else ImeAction.Next),
-                helpLink = helpLinks[platform.name]!!
             )
         }
     }
